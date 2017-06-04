@@ -1,0 +1,57 @@
+#mycontainer {
+  background: rgba(0, 0, 0, 0.45);
+  height: 100%;
+}
+html, body { height: 100% }
+
+#bomb-bar {
+  width: 100%;
+  border-top: 8px solid #39d62f; // #d62f2f;
+}
+.bomb-seconds {
+  text-align: center;
+  font-size: 21px;
+  font-weight: bold;
+  color:  #39d62f;
+}
+.bomb {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( .75 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( .75 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+  }
+  80%
+  {
+    transform: scale( .75 );
+  }
+  100%
+  {
+    transform: scale( .75 );
+  }
+}
+.bomb.heartbeat {
+  color: red;
+  animation-name: heartbeat; 
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 0.5s;
+  animation-direction: alternate;
+}
