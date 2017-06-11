@@ -19,6 +19,15 @@ html, body { height: 100% }
   margin-bottom: 10px;
 }
 
+/*
+#ex1Slider .slider-selection {
+  backgroud: #BABABA;
+}
+*/
+#ex1Slider { 
+    width: 100%;
+}
+
 
 @keyframes heartbeat
 {
