@@ -1,12 +1,12 @@
-#mycontainer {
+#surveyContainer {
   background: rgba(0, 0, 0, 0.45);
   height: 100%;
 }
 html, body { height: 100% }
 
 #bomb-bar {
-  width: 100%;
-  border-top: 8px solid #39d62f; // #d62f2f;
+  margin-left: 50px;
+  border-top: 8px solid #39d62f; //#d62f2f;
 }
 .bomb-seconds {
   text-align: center;
@@ -19,12 +19,7 @@ html, body { height: 100% }
   margin-bottom: 10px;
 }
 
-/*
-#ex1Slider .slider-selection {
-  backgroud: #BABABA;
-}
-*/
-#ex1Slider { 
+#answerSlider { 
     width: 100%;
 }
 
@@ -41,7 +36,7 @@ html, body { height: 100% }
   }
   40%
   {
-    transform: scale( .75 );
+    transform: scale( .75 )
   }
   60%
   {

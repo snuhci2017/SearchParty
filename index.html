@@ -4,19 +4,21 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-	<link rel="stylesheet" href="./css/main.css" type="text/css">
     <link rel="stylesheet" href="./css/bootstrap-slider.css" type="text/css"/> 
-  </head>
+ 	<link rel="stylesheet" href="./css/main.css" type="text/css">
+ </head>
   <body>
-	<div id="mycontainer" style="padding: 40px">
+    <div id="
+    
+	<div id="surveyContainer" style="padding: 40px">
 	  <div id="card" class="card" style="width: 400px; margin: 0 auto">
 		<div class="card-block">
-		  <h4 class="card-title">Question 4</h4>
+		  <h4 class="card-title">Question 1</h4>
 		  <p class="card-text">Do you agree with obamacare?</p>
 	      <div style="padding-bottom: 25px; border-bottom: solid 1px #dedede">
             <input
-              id="ex1"
-              data-slider-id='ex1Slider'
+              id="answer"
+              data-slider-id='answerSlider'
               type="text"
               data-slider-min="0"
               data-slider-max="100"
@@ -25,7 +27,7 @@
             />
 		  </div>
 	      <div style="padding-top: 25px">
-			<i class="fa fa-bomb bomb" aria-hidden="true"></i>
+			<a class="fa fa-bomb bomb" aria-hidden="true"></a>
 			<div id="bomb-bar"></div>
 
 			<div class="bomb-seconds">5.000s</div>
@@ -34,12 +36,13 @@
 	  </div>
 	</div>    
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./lib/jquery-3.2.1.min.js"></script>
     <script src="./lib/d3.v3.min.js" charset="utf-8"></script>
     <script src="./lib/bootstrap-slider.js" charset="utf-8"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js" charset="utf-8"></script>
     <script src="./lib/chroma.js" charset="utf-8"></script>
 
-    <script src="./js/bomb.js" charset="utf-8"></script>
+    <script src="./js/data.js" charset="utf-8"></script>
+    <script src="./js/main.js" charset="utf-8"></script>
   </body>
 </html>
