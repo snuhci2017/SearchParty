@@ -1,0 +1,24 @@
+#svgContainer {
+  width: 650px;
+  height: 570px;
+  background-color: #ffffff;
+}
+
+svg {
+  font: 12px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.brush rect{
+  opacity: 0.2;
+}
