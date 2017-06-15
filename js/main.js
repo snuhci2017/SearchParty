@@ -1,3 +1,19 @@
+$(function () {
+$(".userProfileForm").submit(function () {
+  $(".panel").addClass("disabled");
+  $("#surveyContainer").removeClass("disabled");
+  startSurvey();
+});
+
+
+function startResultPanel(surveyResult) {
+  $(".panel").addClass("disabled");
+  $("#resultContainer").removeClass("disabled");
+
+  // HERE COMES RESULT PANEL SOURCE CODES.
+}
+
+
 var bombSeconds = $(".bomb-seconds")[0];
 var tl;
 var partyScore = [0, 0, 0, 0];
@@ -15,7 +31,7 @@ function startSurvey() {
     tl = new TimelineMax()
     .addCallback(showNext, 0)
     .from(
-    ".card",
+    "#surveyCard",
     .45,
     {opacity: 0.5, scale: 0.7, ease: Back.easeOut.config(1.7)}
     )
@@ -43,7 +59,7 @@ function startSurvey() {
     2
     )
     .to(
-    ".card",
+    "#surveyCard",
     0.5,
     {rotation: "45deg", y: "+250px", opacity: 0.},
     5
@@ -55,14 +71,11 @@ function startSurvey() {
     }, "+=0");
 }
 
-startSurvey();
-
-//$("#mycontainer").click(function () {
-//  tl.restart();
-//});
 
 var slider = $('#answer').slider();
-slider.slider("on", "slideStart", function(){
+// 터치 반응 카드 전체 확대
+// slider.slider("on", "slideStart", function(){
+$("#surveyContainer").click(function () {   
     console.log("Answered");
     console.log(ratio);
     var answer = 0;
@@ -108,17 +121,20 @@ function showNext() {
 
 function endSurvey() {
     tl.kill();
-    tl.set(".card", {rotation: "45deg", opacity: 0});
+    tl.set("#surveyCard", {rotation: "45deg", opacity: 0});
     console.log(partyScore);
+    startResultPanel({
+      partyScore: partyScore
+    });
 }
 
 function showQuestion() {
     var title = questionData[typeIndex].type + " " + (answerIndex + 1);
-    $(".card-title").text(title);
+    $("#surveyCard .card-title").text(title);
     console.log(title);
 
     var desc = questionData[typeIndex].data[answerIndex][0];
-    $(".card-text").text(desc);
+    $("#surveyCard .card-text").text(desc);
 }
 
 // 사용자가 질문에 동의하는지 여부를 체크하는 용도의 슬라이더바에 대한 정의
@@ -139,16 +155,26 @@ function setSliderValue(ratio) {
         .css("background", color);
 }
 
-var boxLeft = 743;
-var boxTop = 141;
-var width = 360;
+var bbox = null;
+var width = null;
 var ratio = 0;
-$("#card").mousemove(function (ev) {
-    var offX = ev.clientX - boxLeft,
-        offY = ev.clientY - boxTop;
+$("#surveyCard").mousemove(function (ev) {
+    var elt = $("#answerSlider")[0];
+    if (!elt) {
+      return;
+    }
+    if (!bbox) {
+      bbox = elt.getBoundingClientRect();
+      width = bbox.right - bbox.left + 1;
+    }
+    var offX = ev.clientX - bbox.left,
+        offY = ev.clientY - bbox.top;
 
     ratio = offX / width;
     ratio = Math.max(Math.min(ratio, 1),0);
+    console.log(ratio);
 
     setSliderValue(ratio);
+});
+
 });
