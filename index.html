@@ -10,6 +10,7 @@
  </head>
   <body>
     <div style="height: 100%; width: 100%;">
+      <!--유저의 간단한 신상정보를 받아오는 화면을 그리는 부분입니다.-->
       <div id="userProfileContainer" class="container panel">
           <form id="userProfileForm" class="userProfileForm card" onsubmit="return false;">
             <div class="card-block">
@@ -37,6 +38,7 @@
             </div>
           </form>
     </div>
+    <!--유저가 설문을 진행하는 화면입니다. 같은 카드가 계속 리프레쉬되면서 등장하게 만들었습니다.-->
 	<div id="surveyContainer" class="disabled panel" style="padding: 40px">
 	  <div id="surveyCard" class="card" style="width: 400px; margin: 0 auto">
 		<div class="card-block">
@@ -65,7 +67,8 @@
 		  </div>
 		</div>
 	  </div>
-	</div>    
+	</div>
+    <!--결과창을 d3로 구성했습니다.-->
     <div id="resultContainer" class="disabled panel container">
       <div class="card">
         <div class="card-block">
