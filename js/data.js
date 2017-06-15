@@ -40,4 +40,4 @@ var questionData = [
     }
 ];
 
-console.log(questionData);
+//console.log(questionData);

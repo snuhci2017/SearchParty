@@ -1,4 +1,8 @@
+var kMaxType = 5;
+var kMaxAnswer = 5;
+
 $(function () {
+//클래스에 disabled가 있으면 화면에 안보이도록 합니다.
 $(".userProfileForm").submit(function () {
   $(".panel").addClass("disabled");
   $("#surveyContainer").removeClass("disabled");
@@ -10,24 +14,25 @@ function startResultPanel(surveyResult) {
   $(".panel").addClass("disabled");
   $("#resultContainer").removeClass("disabled");
 
-  // HERE COMES RESULT PANEL SOURCE CODES.
+  resetSvg();
+  showBarChart(surveyResult);
 }
 
 
 var bombSeconds = $(".bomb-seconds")[0];
 var tl;
-var partyScore = [0, 0, 0, 0];
-var kMaxType = 5;
-var kMaxAnswer = 5;
+var partyScorePerType = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+var partyScoreSum = [0, 0, 0, 0];
 var typeIndex = 0;
 var answerIndex = 0;
 
 function startSurvey() {
-    partyScore = [0, 0, 0, 0];
+    partyScorePerType = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+    partyScoreSum = [0, 0, 0, 0];
     typeIndex = 0;
     answerIndex = 0;
 
-    // 시간제한 막대 줄어들게 만드는 부분
+    // 시간제한 막대 줄어들게 만드는 부분, 등장할때 작다가 커지면서 등장, 일정 시간되면 돌아가면서 사라지는 이펙트
     tl = new TimelineMax()
     .addCallback(showNext, 0)
     .from(
@@ -65,7 +70,7 @@ function startSurvey() {
     5
     )
     .add(function () {
-        console.log("Time Out");
+        //console.log("Time Out");
         
         reset();
     }, "+=0");
@@ -76,8 +81,8 @@ var slider = $('#answer').slider();
 // 터치 반응 카드 전체 확대
 // slider.slider("on", "slideStart", function(){
 $("#surveyContainer").click(function () {   
-    console.log("Answered");
-    console.log(ratio);
+    //console.log("Answered");
+    //console.log(ratio);
     var answer = 0;
     if (ratio >= 0.6) {
         answer = 1;
@@ -85,11 +90,12 @@ $("#surveyContainer").click(function () {
         answer = -1;
     }
 
-    console.log(typeIndex, answerIndex);
+    //console.log(typeIndex, answerIndex);
     var partyData = questionData[typeIndex].data[answerIndex - 1];
     for (var i = 1; i <= 4; i++) {
         if (answer == partyData[i]) {
-            partyScore[i - 1]++;
+            partyScorePerType[typeIndex][i - 1]++;
+            partyScoreSum[i - 1]++;
         }
     }
 
@@ -122,16 +128,17 @@ function showNext() {
 function endSurvey() {
     tl.kill();
     tl.set("#surveyCard", {rotation: "45deg", opacity: 0});
-    console.log(partyScore);
+    //console.log(partyScore);
     startResultPanel({
-      partyScore: partyScore
+      partyScorePerType: partyScorePerType,
+      partyScoreSum: partyScoreSum
     });
 }
 
 function showQuestion() {
     var title = questionData[typeIndex].type + " " + (answerIndex + 1);
     $("#surveyCard .card-title").text(title);
-    console.log(title);
+    //console.log(title);
 
     var desc = questionData[typeIndex].data[answerIndex][0];
     $("#surveyCard .card-text").text(desc);
@@ -158,6 +165,7 @@ function setSliderValue(ratio) {
 var bbox = null;
 var width = null;
 var ratio = 0;
+// 마우스 움직일때마다 슬라이드를 움직이고 업데이트
 $("#surveyCard").mousemove(function (ev) {
     var elt = $("#answerSlider")[0];
     if (!elt) {
@@ -172,7 +180,7 @@ $("#surveyCard").mousemove(function (ev) {
 
     ratio = offX / width;
     ratio = Math.max(Math.min(ratio, 1),0);
-    console.log(ratio);
+    //console.log(ratio);
 
     setSliderValue(ratio);
 });
